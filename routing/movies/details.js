@@ -17,7 +17,7 @@ exports.pagination = defaultResponse(req => {
 })
 
 exports.add = defaultResponse(async req => {
-    if ( Object.keys(req.body).length > 1 ) throw 'You can only send movie title'
+    if ( Object.keys(req.body).length > 1 || req.body.title) throw 'You can only send movie title with capitalized first letter'
 
     return fetch(`http://www.omdbapi.com/?apikey=a02d102&t=${req.body.Title}`)
         .then(res => res.json())
