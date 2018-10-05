@@ -15,9 +15,5 @@ module.exports.getFilters = (query) => {
     const filterBy = query.filterBy
     const filter = query.filterValue
     
-    console.log({[filterBy]: filter});
-    
-    return { 
-        [filterBy]: filter
-    }
+    return { [filterBy]: filter }
 }

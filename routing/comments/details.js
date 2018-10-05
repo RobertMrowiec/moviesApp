@@ -13,7 +13,7 @@ exports.pagination = defaultResponse(req => {
     const limit = Number(req.params.limit)
     const filter = getFilters(req.query)
     return Promise.all([
-        Comment.count(filter),
+        Comment.countDocuments(filter),
         Comment.find(filter).sort(req.query.sort || '').populate('movieId').skip(limit * (page - 1)).limit(limit)
     ]).then(([total, result]) => ({total, result}))
 })
