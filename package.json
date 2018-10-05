@@ -4,7 +4,8 @@
   "description": "Movies application created with Node.js with Express framework and MongoDB as database",
   "main": "moviesApp.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node moviesApp.js"
   },
   "repository": {
     "type": "git",
