@@ -1,4 +1,5 @@
 const Comment = require('../../models/comment')
+const Movie = require('../../models/movie')
 const { defaultResponse, getFilters } = require('../../common')
 
 exports.find = defaultResponse(req => {
@@ -18,6 +19,10 @@ exports.pagination = defaultResponse(req => {
     ]).then(([total, result]) => ({total, result}))
 })
 
-exports.add = defaultResponse(req => new Comment(req.body).save())
+exports.add = defaultResponse(async req => {
+    const movie = await Movie.findById(req.body.movieId).exec()
+    if (!movie) throw 'Movie with specific ID doesn`t exist'
+    return new Comment(req.body).save().then(comment => Comment.findById(comment._id).populate('movieId').exec())
+})
 
 exports.delete = defaultResponse(req => Comment.findByIdAndRemove(req.params.id).then(() => `Deleted comment`))
