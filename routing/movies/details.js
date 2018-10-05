@@ -2,7 +2,10 @@ const Movie = require('../../models/movie')
 const { defaultResponse, getFilters } = require('../../common')
 const fetch = require('node-fetch')
 
-exports.find = defaultResponse(req => Movie.find().sort(req.query.sortBy || '').exec())
+exports.find = defaultResponse(req => {
+    const filter = getFilters(req.query)
+    return Movie.find(filter).sort(req.query.sortBy || '').exec()
+})
 
 exports.findById = defaultResponse(req => Movie.findById(req.params.id).exec())
 
