@@ -1,0 +1,31 @@
+{
+  "name": "moviesapp",
+  "version": "0.0.1",
+  "description": "Movies application created with Node.js with Express framework and MongoDB as database",
+  "main": "moviesApp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/black09bb/moviesApp.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "movieapp",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "Robert Mrowiec",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/black09bb/moviesApp/issues"
+  },
+  "homepage": "https://github.com/black09bb/moviesApp#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.3.1"
+  }
+}
