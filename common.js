@@ -1,4 +1,4 @@
-module.exports = defaultResponse = (func) => {
+module.exports.defaultResponse = (func) => {
     return (req, res) => func(req, res) 
         .then(x => res.status(200).json(x))
         .catch(err => {
@@ -8,4 +8,16 @@ module.exports = defaultResponse = (func) => {
             }
             return res.status(400).json({ message: err })
         })
+}
+
+module.exports.getFilters = (query) => {
+    if (!query.filterBy && !query.filter) return {}
+    const filterBy = query.filterBy
+    const filter = query.filterValue
+    
+    console.log({[filterBy]: filter});
+    
+    return { 
+        [filterBy]: filter
+    }
 }

@@ -1,16 +1,30 @@
 const Movie = require('../../models/movie')
-const defaultResponse = require('../../common')
+const { defaultResponse, getFilters } = require('../../common')
+const fetch = require('node-fetch')
 
-exports.find = defaultResponse(req => Movie.find().exec())
+exports.find = defaultResponse(req => Movie.find().sort(req.query.sortBy || '').exec())
 
 exports.findById = defaultResponse(req => Movie.findById(req.params.id).exec())
+
+exports.pagination = defaultResponse(req => {
+    const page = req.params.page
+    const limit = Number(req.params.limit)
+    const filter = getFilters(req.query)
+    return Promise.all([
+        Movie.count(filter),
+        Movie.find(filter).sort(req.query.sort || '').skip(limit * (page - 1)).limit(limit)
+    ]).then(([total, result]) => ({total, result}))
+})
 
 exports.add = defaultResponse(async req => {
     if ( Object.keys(req.body).length > 1 ) throw 'You can only send movie title'
 
-    return new Movie(req.body).save()
+    return fetch(`http://www.omdbapi.com/?apikey=a02d102&t=${req.body.Title}`)
+        .then(res => res.json())
+        .then(body => new Movie({...req.body, ...body}).save())
+        .catch(console.log)
 })
 
-exports.delete = defaultResponse(async req => {
-    return Movie.findByIdAndRemove(req.params.id).then(movie => `Deleted ${movie.title} movie`)
+exports.delete = defaultResponse(req => {
+    return Movie.findByIdAndRemove(req.params.id).then(movie => `Deleted ${movie.Title} movie`)
 })
