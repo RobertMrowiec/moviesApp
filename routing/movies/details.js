@@ -11,7 +11,7 @@ exports.pagination = defaultResponse(req => {
     const limit = Number(req.params.limit)
     const filter = getFilters(req.query)
     return Promise.all([
-        Movie.count(filter),
+        Movie.countDocuments(filter),
         Movie.find(filter).sort(req.query.sort || '').skip(limit * (page - 1)).limit(limit)
     ]).then(([total, result]) => ({total, result}))
 })
