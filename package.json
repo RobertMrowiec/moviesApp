@@ -2,10 +2,10 @@
   "name": "moviesapp",
   "version": "0.0.2",
   "description": "Movies application created with Node.js with Express framework and MongoDB as database",
-  "main": "moviesApp.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node moviesApp.js"
+    "testMac": "mocha $(find . -name '*.test.js' ! -ipath '*node_modules*') --timeout 5000",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
