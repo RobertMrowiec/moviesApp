@@ -5,8 +5,6 @@ const server = require('../app')
 
 chai.use(chaiHttp)
 
-let movieId
-
 describe('POST Movies', () => {
     it('should add movie', (done) => {
         chai.request(server)
@@ -18,7 +16,7 @@ describe('POST Movies', () => {
                 res.should.have.status(200)
                 res.body.should.be.an('object')
                 res.body.Title.should.equal('Fast & Furious 6')
-                movieId = res.body._id
+                res.body.Rated.should.equal('PG-13')
                 done()
             })
             .catch(console.log)
@@ -35,7 +33,6 @@ describe('POST Movies', () => {
                 res.body.should.be.an('object')
                 res.body.Title.should.equal('Tomorrow')
                 res.body.Year.should.equal('2015')
-                movieId = res.body._id
                 done()
             })
             .catch(console.log)
@@ -83,18 +80,16 @@ describe('GET Movies', () => {
         .catch(console.log)
     })
 
-    it('should return array of movies sorted by year', (done) => {
+    it('should return array of movies sorted by year descending', (done) => {
         chai.request(server)
-        .get('/api/movies?sortBy=Year')
+        .get('/api/movies?sortBy=-Year')
         .then(res => {
             res.should.have.status(200)
             res.body.should.be.an('array')
-            res.body
             done()
         })
         .catch(console.log)
     })
-
 })
 
 
