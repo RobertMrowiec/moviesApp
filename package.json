@@ -1,6 +1,6 @@
 {
   "name": "moviesapp",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Movies application created in Node.js with Express framework and MongoDB database",
   "main": "app.js",
   "scripts": {
@@ -30,6 +30,7 @@
     "express": "^4.16.3",
     "mongoose": "^5.3.1",
     "node-fetch": "^2.2.0",
+    "surprise-cors": "^1.1.0",
     "swagger-ui-express": "^4.0.1"
   },
   "devDependencies": {
