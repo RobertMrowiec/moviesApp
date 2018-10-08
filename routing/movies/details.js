@@ -29,5 +29,5 @@ exports.add = defaultResponse(async req => {
 })
 
 exports.delete = defaultResponse(req => {
-    return Movie.findByIdAndRemove(req.params.id).then(movie => `Deleted ${movie.Title} movie`)
+    return Movie.findOneAndDelete({_id: req.params.id}).then(movie => `Deleted ${movie.Title} movie`)
 })

@@ -1,10 +1,11 @@
 {
   "name": "moviesapp",
-  "version": "0.0.2",
-  "description": "Movies application created with Node.js with Express framework and MongoDB as database",
+  "version": "0.0.3",
+  "description": "Movies application created in Node.js with Express framework and MongoDB database",
   "main": "app.js",
   "scripts": {
     "testMac": "mocha $(find . -name '*.test.js' ! -ipath '*node_modules*') --timeout 5000",
+    "testWin": "mocha",
     "start": "node app.js"
   },
   "repository": {
@@ -29,5 +30,10 @@
     "express": "^4.16.3",
     "mongoose": "^5.3.1",
     "node-fetch": "^2.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
