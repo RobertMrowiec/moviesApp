@@ -88,7 +88,7 @@
         }
       }
     },
-    "/comments/:{_id}": {
+    "/comments/{_id}": {
       "get": {
         "summary": "Get comment by ID",
         "operationId": "GetCommentById",
@@ -143,7 +143,7 @@
         }
       }
     },
-    "/comments/page/:{page}/limit/:{limit}": {
+    "/comments/page/{page}/limit/{limit}": {
       "get": {
         "summary": "Get pagination with comments",
         "operationId": "GetCommentsPagination",
@@ -285,7 +285,7 @@
         }
       }
     },
-    "/movies/:{_id}": {
+    "/movies/{_id}": {
       "get": {
         "summary": "Get movie by ID",
         "operationId": "GetMovieById",
@@ -340,7 +340,7 @@
         }
       }
     },
-    "/movies/page/:{page}/limit/:{limit}": {
+    "/movies/page/{page}/limit/{limit}": {
       "get": {
         "summary": "Get pagination of movies",
         "operationId": "GetMoviesPagination",
