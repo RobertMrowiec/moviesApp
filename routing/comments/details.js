@@ -10,9 +10,9 @@ exports.find = defaultResponse(req => {
 exports.findById = defaultResponse(req => Comment.findById(req.params.id).populate('movieId').exec())
 
 exports.pagination = defaultResponse(req => {
-    const page = req.params.page
-    const limit = Number(req.params.limit)
     const filter = getFilters(req.query)
+    const limit = Number(req.params.limit)
+    const page = req.params.page
     return Promise.all([
         Comment.countDocuments(filter),
         Comment.find(filter).sort(req.query.sort || '').populate('movieId').skip(limit * (page - 1)).limit(limit)

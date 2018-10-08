@@ -1,6 +1,6 @@
+const fetch = require('node-fetch')
 const Movie = require('../../models/movie')
 const { defaultResponse, getFilters } = require('../../common')
-const fetch = require('node-fetch')
 
 exports.find = defaultResponse(req => {
     const filter = getFilters(req.query)
@@ -10,9 +10,9 @@ exports.find = defaultResponse(req => {
 exports.findById = defaultResponse(req => Movie.findById(req.params.id).exec())
 
 exports.pagination = defaultResponse(req => {
-    const page = req.params.page
-    const limit = Number(req.params.limit)
     const filter = getFilters(req.query)
+    const limit = Number(req.params.limit)
+    const page = req.params.page
     return Promise.all([
         Movie.countDocuments(filter),
         Movie.find(filter).sort(req.query.sort || '').skip(limit * (page - 1)).limit(limit)
@@ -28,6 +28,4 @@ exports.add = defaultResponse(async req => {
         .catch(console.log)
 })
 
-exports.delete = defaultResponse(req => {
-    return Movie.findOneAndDelete({_id: req.params.id}).then(movie => `Deleted ${movie.Title} movie`)
-})
+exports.delete = defaultResponse(req => Movie.findOneAndDelete({_id: req.params.id}).then(movie => `Deleted ${movie.Title} movie`))

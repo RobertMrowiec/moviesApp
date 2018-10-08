@@ -1,0 +1,543 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Movies & comments application"
+  },
+  "servers": [
+    {
+      "url": "https://movie-be.herokuapp.com/api"
+    }
+  ],
+  "paths": {
+    "/comments": {
+      "get": {
+        "parameters": [
+          {
+            "name": "filterBy",
+            "in": "query",
+            "required": false,
+            "description": "Key by which You want to filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterValue",
+            "in": "query",
+            "required": false,
+            "description": "Value by which You want to filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "List of all comments",
+        "operationId": "GetCommentss",
+        "tags": [
+          "comments"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all comments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comments"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a comment",
+        "operationId": "PostComments",
+        "tags": [
+          "comments"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "movieId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Added comment",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comments/:{_id}": {
+      "get": {
+        "summary": "Get comment by ID",
+        "operationId": "GetCommentById",
+        "tags": [
+          "comments"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "description": "_id of specific comments",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment by _id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comment"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete comment by _id",
+        "operationId": "DeleteCommentById",
+        "tags": [
+          "comments"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "description": "_id of specific comments",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted comment"
+          }
+        }
+      }
+    },
+    "/comments/page/:{page}/limit/:{limit}": {
+      "get": {
+        "summary": "Get pagination with comments",
+        "operationId": "GetCommentsPagination",
+        "tags": [
+          "comments"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "description": "number of page",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "required": true,
+            "description": "limit per page",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterBy",
+            "in": "query",
+            "required": false,
+            "description": "Key by which You want to filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterValue",
+            "in": "query",
+            "required": false,
+            "description": "Value by which You want to filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comments pagination",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "number"
+                    },
+                    "result": {
+                      "$ref": "#/components/schemas/Comments"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies": {
+      "get": {
+        "parameters": [
+          {
+            "name": "filterBy",
+            "in": "query",
+            "required": false,
+            "description": "Key by which You want to filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterValue",
+            "in": "query",
+            "required": false,
+            "description": "Value by which You want to filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "List of all movies",
+        "operationId": "GetMovies",
+        "tags": [
+          "movies"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movies"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a movie",
+        "operationId": "PostMovies",
+        "tags": [
+          "movies"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Title": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Added movie with data fetched from online public database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/:{_id}": {
+      "get": {
+        "summary": "Get movie by ID",
+        "operationId": "GetMovieById",
+        "tags": [
+          "movies"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "description": "_id of specific movie",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie by _id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete movie by _id",
+        "operationId": "DeleteMovieById",
+        "tags": [
+          "movies"
+        ],
+        "parameters": [
+          {
+            "name": "_id",
+            "in": "path",
+            "required": true,
+            "description": "_id of specific movie",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted {Title} movie"
+          }
+        }
+      }
+    },
+    "/movies/page/:{page}/limit/:{limit}": {
+      "get": {
+        "summary": "Get pagination of movies",
+        "operationId": "GetMoviesPagination",
+        "tags": [
+          "movies"
+        ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "required": true,
+            "description": "number of page",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "required": true,
+            "description": "limit per page",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterBy",
+            "in": "query",
+            "required": false,
+            "description": "Key by which You want to filter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filterValue",
+            "in": "query",
+            "required": false,
+            "description": "Value by which You want to filter",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movies pagination",
+            "content": {
+              "application/json:": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total": {
+                      "type": "number"
+                    },
+                    "result": {
+                      "$ref": "#/components/schemas/Movies"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Comment": {
+        "type": "object",
+        "required": [
+          "description",
+          "movieId"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "movieId": {
+            "type": null,
+            "$ref": "#/components/schemas/Movie"
+          }
+        }
+      },
+      "Comments": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Comment"
+        }
+      },
+      "Movie": {
+        "type": "object",
+        "required": [
+          "Title"
+        ],
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "Title": {
+            "type": "string"
+          },
+          "Year": {
+            "type": "string"
+          },
+          "Rated": {
+            "type": "string"
+          },
+          "Released": {
+            "type": "string"
+          },
+          "Runtime": {
+            "type": "string"
+          },
+          "Genre": {
+            "type": "string"
+          },
+          "Director": {
+            "type": "string"
+          },
+          "Writer": {
+            "type": "string"
+          },
+          "Actors": {
+            "type": "string"
+          },
+          "Plot": {
+            "type": "string"
+          },
+          "Language": {
+            "type": "string"
+          },
+          "Country": {
+            "type": "string"
+          },
+          "Awards": {
+            "type": "string"
+          },
+          "Poster": {
+            "type": "string"
+          },
+          "Ratings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Source": {
+                  "type": "string"
+                },
+                "Value": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "Metascore": {
+            "type": "string"
+          },
+          "imdbRating": {
+            "type": "string"
+          },
+          "imdbVotes": {
+            "type": "string"
+          },
+          "imdbID": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "DVD": {
+            "type": "string"
+          },
+          "BoxOffice": {
+            "type": "string"
+          },
+          "Production": {
+            "type": "string"
+          },
+          "Website": {
+            "type": "string"
+          },
+          "Response": {
+            "type": "string"
+          }
+        }
+      },
+      "Movies": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Movie"
+        }
+      }
+    }
+  }
+}

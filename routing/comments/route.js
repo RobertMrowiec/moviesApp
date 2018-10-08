@@ -1,6 +1,6 @@
+const comment = require('./details')
 const express = require('express')
 const router = express.Router()
-const comment = require('./details')
 
 router.get('/', comment.find)
     .get('/:id', comment.findById)
