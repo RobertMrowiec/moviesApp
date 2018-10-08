@@ -1,6 +1,6 @@
 {
   "name": "moviesapp",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Movies application created in Node.js with Express framework and MongoDB database",
   "main": "app.js",
   "scripts": {
