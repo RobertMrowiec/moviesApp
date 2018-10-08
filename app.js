@@ -16,8 +16,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/moviesapp', { 
     useNewUrlParser: true
 }).then(() => {
-    console.log('Server is running on port: 8001');
-    app.listen(8001);
+    console.log(`Server is running on port: ${process.env.PORT || 8001}`);
+    app.listen(process.env.PORT || 8001);
 });
 
 module.exports = app;
