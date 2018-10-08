@@ -9,6 +9,9 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+const allowedOrigins = ['http://editor.swagger.io', 'http://localhost:8001']
+app.use(require('surprise-cors')(allowedOrigins))
+
 app.use('/api/comments', require('./routing/comments/route'))
 app.use('/api/movies', require('./routing/movies/route'))
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
