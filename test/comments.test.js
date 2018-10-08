@@ -1,13 +1,13 @@
 const chai = require('chai')
 const chaiHttp = require('chai-http')
-const should = chai.should()
 const server = require('../app')
+const should = chai.should()
 
 chai.use(chaiHttp)
 
 let commentId
-let secondCommentId
 let firstMovieId
+let secondCommentId
 let secondMovieId
 
 describe('POST COMMENTS', () => {
