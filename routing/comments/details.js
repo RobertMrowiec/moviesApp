@@ -25,4 +25,4 @@ exports.add = defaultResponse(async req => {
     return new Comment(req.body).save().then(comment => Comment.findById(comment._id).populate('movieId').exec())
 })
 
-exports.delete = defaultResponse(req => Comment.findByIdAndRemove(req.params.id).then(() => `Deleted comment`))
+exports.delete = defaultResponse(req => Comment.findOneAndDelete({_id: req.params.id}).then(() => `Deleted comment`))
