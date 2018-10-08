@@ -35,7 +35,7 @@ Used port : 8001
 
 # Hosting 
 
-Url for Heroku application is : https://movie-be.herokuapp.com
+Url for Heroku application is: https://movie-be.herokuapp.com
 
 # Documentation 
-Will be available soon.
+Url for documentation is: https://movie-be.herokuapp.com/api-docs
